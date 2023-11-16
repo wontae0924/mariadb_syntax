@@ -4,7 +4,7 @@
 insert into author(id, name, email) values(1,'kim','abc@naver.com');
 
 -- SELECT : SELECT 필드이름 FROM 테이블 이름 [where 조건];
--- 모든 필드 검색  SELECT * FROM 테이블 이름;
+-- 모든 필드 검색  SELECT * FROM 테이블 이름; *는 리눅스 시간에도 들었지만 전체라는 의미가 있음
 select*from author;
 select*from author where id=1;
 select name,email from author where id=1;

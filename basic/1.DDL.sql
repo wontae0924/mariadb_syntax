@@ -23,7 +23,7 @@ SHOW TABLES;
 --테이블 컬럼조회
 DESCRIBE author;
 
--- post 테이블 신규 생성
+-- post 테이블 신규 생성 (나중 실습을 위해 posts 오타 ,content)
 CREATE TABLE posts(id INT PRIMARY KEY, title VARCHAR(255), 
 content VARCHAR(255), author_id INT, FOREIGN KEY(author_id) REFERENCES author(id));
 
