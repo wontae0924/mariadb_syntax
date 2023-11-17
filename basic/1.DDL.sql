@@ -36,7 +36,7 @@ SHOW CREATE TABLE posts;
 -- CREATE TABLE `posts` (
 --    `id` int(11) NOT NULL,
 --    `title` varchar(255) DEFAULT NULL,
---    `content` varchar(255) DEFAULT NULL,
+--    `content` varchar(255) D  EFAULT NULL,
 --    `author_id` int(11) DEFAULT NULL,
 --    PRIMARY KEY (`id`),
 --    KEY `author_id` (`author_id`),
