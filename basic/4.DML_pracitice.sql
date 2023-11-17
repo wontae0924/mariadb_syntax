@@ -26,3 +26,4 @@ delete from post where id=3; --id는 post에 글쓴적이 없음
 delete from author where id=2; -- 삭제 할려고 하나 id=2는 post에 글쓴적이 있어 삭제못하는 에러 발생
 delete from post where author_id=2; -- 하여 그 글쓴 기록을 삭제 조치
 delete from author where id=2; -- 다시 삭제하면 이상 없음
+

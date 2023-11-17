@@ -33,3 +33,14 @@ update author set email='hello1@test.com'where id = 2;
 -- delete from 테이블이름 where 필드이름=데이터 값
 -- where 절을 생략하면, 해당 테이블에 저장된 모든 데이터가 삭제
 delete from post where author_id=5;
+
+-- blob
+create table table_blob(id int, myimg longblob);
+insert into table_blob(id,myimg) values(1,load_file('C:\\test_picture.jpg'));
+select*from table_blob;
+select hex(myimg) from table_blob where id = 1;
+
+-- enum 컬러명 ENUM(’데이터값1’,’데이터값2’…) 
+-- role enum('admin','user') not null default 'user'; -> admin ,user로 데이터 
+ALTER TABLE author MODIFY COLUMN role enum('admin','user') not null default 'user';
+
