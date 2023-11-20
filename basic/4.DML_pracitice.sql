@@ -1,4 +1,4 @@
---  2. 실습
+--  2. insert 실습
 -- author 데이터 5개 추가
 --  -> address에는 데이터 추가 X
 insert into author(id, name, email,password,role) values(2,'lee1','abc1@naver.com','1234','abc1');
@@ -17,7 +17,7 @@ insert into post(id, title , contents) values(4,'title3','hello world4');
 --  -> 1개는 저자가 author_id에 없는 데이터 추가 -> 에러 발생 확인위해
 insert into post(id, title, contents,author_id) values(5,'title5','hello world5',999);
 
--- 3. 실습
+-- 3. update,delete실습
 -- author 데이터 중 id가 4인 데이터를 email을 abc@naver.com, name을 abc로 변경
 update author set email='abc@naver.com', name='abc' where id=4;
 -- post에 글쓴적이 없는 author 데이터 1개 삭제

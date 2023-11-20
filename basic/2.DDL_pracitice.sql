@@ -1,4 +1,4 @@
--- 1. 실습
+-- 1. DDL  실습
 -- post 테이블의 contents 컬럼 글자수 3000으로 변경
 alter table post modify COLUMN contents varchar(3000);
 -- autor 테이블에 address 컬럼 varchar 255로 추가
