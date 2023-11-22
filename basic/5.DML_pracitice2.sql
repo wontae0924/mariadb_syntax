@@ -81,7 +81,7 @@ select*from post where id >= 2 && id <= 4;
 
 -- 10. 날짜 실습
 -- date_format, like, between ,비교연산자 를 각각 사용하여 2023년에 생성된 데이터 출력
-SELECT*FROM post where date_format(create_time,'%Y') = '2023';
+SELECT*FROM post where  (create_time,'%Y') = '2023';
 SELECT*FROM post where create_time like '2023-01-01%';
 SELECT*FROM post where create_time between '2023-01-01' and '2023-12-31';
 SELECT*FROM post where create_time >= '2023-01-01' and create_time <= '2023-12-31';
@@ -145,4 +145,104 @@ select id,title,content,if(author_id =1 ,'first_author','others' ) as author_typ
 -- 위에서 사용한 ifnull사용하여 동일하게 i 만들기
 select id,title,content,ifnull(id !=1 ,'first_author','others' ) as author_type from post;
 
+-- join 실습
+-- author의 테이블은 일단 다 조회 후 author가 작성한 글정보를 join하여 추가적으로 조회
+SELECT * FROM author a LEFT JOIN post b ON a.id = b.a_id
+-- 
 
+-- join 실습
+-- author 테이블과 post 테이블을 join하여, 글을 작성한 모든 저자의 이름(name)과 해당 글의 제목(title)을 조회하시오.
+-- author눈 alias a, post는 alias p로 쓰시오
+SELECT name,title FROM author as alias a INNER post as alias b on alias a.id = alias b.author_id;
+-- author 테이블과 post 테이블을 join하여, 모든 저자의 이름과 해당 저자가 작성한 글의 제목을 조회하시오
+--  / 글을 작성하지 않은 저자의 경우 글제목 null 표시
+SELECT a.name,b.title FROM author as a left join post as b on a.id = b.author_id;
+-- 위 예제와 동일하게 모든 저자의 이름과 해당 저자가 작성한 글의 제목을 조회 단 저자의 나이가 25세 이상인 저ㅓ마만 조회
+SELECT a.name,b.title FROM author as a left join post as b on a.id = b.author_id where a.age >= 25;
+
+-- group by
+-- author_id별 count 값
+select author_id,count(*) from post group by author_id;
+-- author_id별 price sum ,avg
+select author_id,price,sum(price),avg(price) from post group by author_id;
+-- author_id별로 price평균값을 구하시오. 단 건별로 250이상인 데이터만 평균을 내서 출력하시오
+select author_id,avg(price) from post group by author_id where price >= 250;
+-- author_id별로 price평균값을 구하되 평균값이 250이상인건만 출력하시오
+select author_id,avg(price) from post group by author_id having price >= 250;
+
+-- 저장프로시스 실습
+-- post 테이블에 if문 활용하여 고액 원고료 작가 조회
+select price from post
+declare my_procedure INT DEFAULT 0
+  if my_procedure > 250 then
+  "고액 원료료 작가입니다."
+  else
+  "고액 원료료 작가가 아닙니다."
+  select*from post;
+  end
+
+
+  -- 기타 자료
+  select*from post;
+select*from author;
+
+select count(*)from author;
+select round(avg(price),0) from post;
+
+SELECT name, email FROM author UNION SELECT title,contents FROM post;
+select author_id,count(*) from post group by author_id;
+select author_id,price,sum(price),avg(price) from post group by author_id;
+select author_id,avg(price) from post  where price >= 250 group by author_id;
+select author_id,avg(price) as price from post group by author_id having price >= 250;
+
+show index from author;
+CREATE INDEX index_name ON author(name);
+select*from author where name='abc';
+ CREATE INDEX index_name ON author(name,email);
+ select*from author where name='abc' and email='xxx@naver.com';
+ select * from author where id = 1 and name = ‘abc’;	
+ 
+ select*from mysql.user;
+ show grants for 'root'@'localhost';
+ CREATE USER 'testuser'@'localhost';
+ drop user 'testuser'@'%';
+  show grants for 'testuser'@'localhost';
+  GRANT insert ON board.author TO 'testuser'@'localhost';
+    revoke insert ON board.author from 'testuser'@'localhost';
+      GRANT SELECT ON author_for_view TO 'testuser'@'localhost';
+  FLUSH PRIVILEGES;
+  
+  create VIEW author_for_view as select name , email from author;
+  select * from author_for_view;
+show create procedure getUsers;
+call getUsers(3);
+call getUser1('ss','sdsdsdsd',2);
+
+DELIMITER $$  
+create procedure GetUsers(In userId INT)
+begin
+ select * from author where id = userId;
+end $$
+DELIMITER ;
+
+DELIMITER $$  
+create procedure GetUser1(In useTitle varchar(255),In useContents varchar(255),In useAuthor_id INT)
+begin
+ insert into post(title,contents,author_id) values(useTitle, useContents, useAuthor_id);
+end $$
+DELIMITER ;
+
+  --  while문 실습 author 테이블에 100개의 데이터 넣기
+CREATE PROCEDURE useAuthor()
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    WHILE i <= 100 DO
+    insert into post(title) values(concat("hello world ",i));
+	SET i = i + 1;
+    END WHILE;
+END $$
+DELIMITER ;
+call useAuthor(); -- while문 실행 
+
+-- dump
+mysqldump -u [username] -p --default-character-set=utf8mb4 [database_name] > dumpfile.sql

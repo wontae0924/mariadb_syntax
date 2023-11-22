@@ -77,3 +77,59 @@ select  if(1<10,'참','거짓');
 -- IFNULL()
 -- IFNULL(a,b)
 select id,title,content,ifnull(author_id,'anonymus') from post;
+
+-- INNER join
+SELECT*FROM author INNER JOIN post ON author.ID = post.ID;
+SELECT*FROM author AS a INNER JOIN post  AS b ON a.ID=b.ID;
+-- left join
+SELECT * FROM author a LEFT JOIN post b ON a.id = b.a_id
+-- union join
+SELECT 컬럼1, 컬럼2 FROM TABLE1 UNION SELECT 컬럼1, 컬럼2 FROM TABLE2;
+SELECT name, email FROM author UNION SELECT title,contents FROM post;
+
+-- group by 선택된 레코드의 집합을 특정 값으로 그룹화한 결과 집합
+SELECT 컬럼명 FROM  테이블 GROUP By 컬럼명;
+-- count 카운트 세기
+select count(*)from author;
+-- avg 평균
+select round(avg(price),0) from post; -- round(대상값 , 원하는 소숫점자릿수)
+
+-- view
+  create VIEW author_for_view as select name , email from author;
+select * from author_for_view;
+
+-- 저장 프로시저
+delimiter $$ 
+create procedure procedure_name (parameters)
+begin
+-- sql 문법
+end
+delimiter $$;
+call 프로지저명();
+-- 파라미터느 생략가능하고, 함수와 같이 parameter를 전달하여 실행하는 것도 가능
+
+-- 저장 프로시저
+-- 변수 선언
+declare 변수명 변수타입 [DEFAULT default_value];
+-- 반드시 프로시저나 함수의 본문 시작 부분,즉 begin 바로 뒤에 위치
+
+-- 변수 수정
+set 변수명 = 수정할값;
+-- 제어문
+-- if문
+if 조건식 then
+-- 조건이 참일 떄 실행할 명령
+else
+-- 조건ㅇ 거짓일 때 실행할 명령
+end if;
+-- "select 컬러면 변수"문과 함께 많이 사용
+while 문 
+  while 조건식 do 
+  -- 조건이 참일 동안 반복 실행할 명령
+  end while;
+
+  --  while문
+  WHILE  DO
+    // code
+END WHILE;
+  
