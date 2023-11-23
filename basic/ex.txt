@@ -1,0 +1,17 @@
+설치
+sudo apt-get update
+sudo apt-get upgreade
+sudo apt-get install -y mariadb-server
+리눅스 접속
+sudo systemctl start mariadb
+sudo systemctl enable mariadb 
+sudo mariadb -u root -p
+db생성
+create database board
+use board
+exit
+git clone https://github.com/wontae0924/mariadb_syntax.git
+cd 프로젝트폴더 가서 확인 
+mysql -u root -p board < dumpfile.sql
+use board
+select*from post
