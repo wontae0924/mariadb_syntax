@@ -115,7 +115,7 @@ declare 변수명 변수타입 [DEFAULT default_value];
 
 -- 변수 수정
 set 변수명 = 수정할값;
--- 제어문
+-- 제어문 
 -- if문
 if 조건식 then
 -- 조건이 참일 떄 실행할 명령

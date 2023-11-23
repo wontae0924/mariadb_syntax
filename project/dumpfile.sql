@@ -39,7 +39,7 @@ CREATE TABLE `author` (
 -- Dumping data for table `author`
 --
 
-LOCK TABLES `author` WRITE;
+LOCK TABLES `author` WRITE; 
 /*!40000 ALTER TABLE `author` DISABLE KEYS */;
 INSERT INTO `author` VALUES
 (1,'kim',NULL,NULL,'admin',NULL,21),
